@@ -31,7 +31,7 @@ const replicate = new Replicate({
 });
 
 app.get('/',async (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.send('ok');
 });
 
 app.get('/getAudio' ,async (req,res) =>  {
