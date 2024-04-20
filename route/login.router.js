@@ -9,7 +9,7 @@ LoginRouter.post('/login', async(req, res)=>{
     const {email, password} = req.body;
     const data = userMdel.find({email: email});
     if(data.length > 0) {
-        if(data[0].password == password){
+        if(data[0].password === password){
             res.json({status: true});
         }
         else {
