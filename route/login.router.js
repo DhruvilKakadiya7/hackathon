@@ -7,7 +7,9 @@ const LoginRouter = express.Router();
 
 LoginRouter.post('/login', async(req, res)=>{
     const {email, password} = req.body;
-    const data = userMdel.find({email: email});
+    console.log(email, password);
+    const data = await userMdel.find({email: email});
+    console.log(data);
     if(data.length > 0) {
         if(data[0].password === password){
             res.json({status: true});
@@ -23,7 +25,7 @@ LoginRouter.post('/login', async(req, res)=>{
 
 LoginRouter.post('/signup', async(req, res)=>{
     const {email, password} = req.body;
-    const data = userMdel.find({email: email});
+    const data = userMdel.find({email: '1@gmail.com'});
     if(data.length > 0) {
         res.json({status: false, message: 'Email already in use!'});
     }
