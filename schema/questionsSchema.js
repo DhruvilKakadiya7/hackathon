@@ -8,6 +8,12 @@ const questionsSchema = mongoose.Schema({
     videoUrl: {
         type: String,
     },
+    type: {
+        type: String,
+    },
+    level: {
+        type: String,
+    }
 });
 
 export default mongoose.model("questions", questionsSchema); 
