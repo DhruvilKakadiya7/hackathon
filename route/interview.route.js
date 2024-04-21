@@ -44,7 +44,7 @@ const questions = [
     },
 ];
 
-console.log(questions);
+// console.log(questions);
 
 
 interviewRouter.get('/uploadQuestions', async (req, res) => {

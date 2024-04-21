@@ -14,7 +14,7 @@ dotenv.config();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cookieParser()); 
+app.use(cookieParser());
 app.use('/iv', interviewRouter);
 app.use('/ai', AIRouter);
 app.use('/auth', LoginRouter);
@@ -24,32 +24,32 @@ mongoose.connect('mongodb+srv://hackathon:hackathon@cluster0.1pqceio.mongodb.net
   .then(() => {
     console.log("DataBase connection successful")
   })
-  .catch((e) => { console.log("Database err " + e) }); 
-  
+  .catch((e) => { console.log("Database err " + e) });
+
 const replicate = new Replicate({
-    auth: process.env.REPLICATE_API_TOKEN,
+  auth: process.env.REPLICATE_API_TOKEN,
 });
 
-app.get('/',async (req, res) => {
-    res.send('ok');
+app.get('/', async (req, res) => {
+  res.send('ok');
 });
 
-app.get('/getAudio' ,async (req,res) =>  {
-    console.log('okay');
-    const output = await replicate.run(
-        "lucataco/sadtalker:85c698db7c0a66d5011435d0191db323034e1da04b912a6d365833141b6a285b",
-        {
-          input: {
-            still: true,
-            enhancer: "gfpgan",
-            preprocess: "full",
-            driven_audio: "https://replicate.delivery/pbxt/Jf1gczNATWiC94VPrsTTLuXI0ZmtuZ6k0aWBcQpr7VuRc5f3/japanese.wav",
-            source_image: "https://replicate.delivery/pbxt/Jf1gcsODejVsGRd42eeUj0RXX11zjxzHuLuqXmVFwMAi2tZq/art_1.png"
-          }
-        }
-      );
-      console.log(output);
-    res.send(output);
+app.get('/getVideo', async (req, res) => {
+  // console.log('okay');
+  const output = await replicate.run(
+    "lucataco/sadtalker:85c698db7c0a66d5011435d0191db323034e1da04b912a6d365833141b6a285b",
+    {
+      input: {
+        still: true,
+        enhancer: "gfpgan",
+        preprocess: "full",
+        driven_audio: "https://replicate.delivery/pbxt/Jf1gczNATWiC94VPrsTTLuXI0ZmtuZ6k0aWBcQpr7VuRc5f3/japanese.wav",
+        source_image: "https://replicate.delivery/pbxt/Jf1gcsODejVsGRd42eeUj0RXX11zjxzHuLuqXmVFwMAi2tZq/art_1.png"
+      }
+    }
+  );
+  // console.log(output);
+  res.send(output);
 });
 
 app.listen(8000, () => {
